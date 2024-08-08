@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProPresenterNotifier", "ProPresenterNotifier\ProPresenterNotifier.csproj", "{661D3BC5-FA39-45C8-816E-616E77C09FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProPresenter.Api", "ProPresenter.Api\ProPresenter.Api.csproj", "{C6A15F48-BD45-42ED-BF57-E8411C08A61B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{661D3BC5-FA39-45C8-816E-616E77C09FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{661D3BC5-FA39-45C8-816E-616E77C09FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{661D3BC5-FA39-45C8-816E-616E77C09FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{661D3BC5-FA39-45C8-816E-616E77C09FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6A15F48-BD45-42ED-BF57-E8411C08A61B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6A15F48-BD45-42ED-BF57-E8411C08A61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6A15F48-BD45-42ED-BF57-E8411C08A61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6A15F48-BD45-42ED-BF57-E8411C08A61B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
