@@ -6,17 +6,17 @@
 <PageTitle>Send Message</PageTitle>
 
 <MudContainer>
-            <MudPaper Width="100%" Class="pa-4" Outlined="true">
-                <MudTextField T="string" @bind-Value="StickerNumber" Label="Child Sticker Number" Variant="Variant.Outlined"></MudTextField>
-                <MudRadioGroup T="string" @bind-Value="RoomName">
-                    <MudRadio Value="@("Elementary")">Elementary</MudRadio>
-                    <MudRadio Value="@("PreSchool")">PreSchool</MudRadio>
-                    <MudRadio Value="@("Nursery")">Nursery</MudRadio>
-                    <MudRadio Value="@("PreTeen")">PreTeen</MudRadio>
-                </MudRadioGroup>
-                <MudText Class="ml-4">Selected Option: @RoomName</MudText>
-                <MudButton FullWidth="true" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary" OnClick="SendMessage">Send</MudButton>
-            </MudPaper>
+    <MudPaper Width="100%" Class="pa-4" Outlined="true">
+        <MudTextField T="string" @bind-Value="StickerNumber" Label="Child Sticker Number" Variant="Variant.Outlined"></MudTextField>
+        <MudRadioGroup T="string" @bind-Value="RoomName">
+            <MudRadio Value="@("Elementary")">Elementary</MudRadio>
+            <MudRadio Value="@("PreSchool")">PreSchool</MudRadio>
+            <MudRadio Value="@("Nursery")">Nursery</MudRadio>
+            <MudRadio Value="@("PreTeen")">PreTeen</MudRadio>
+        </MudRadioGroup>
+        <MudText Class="ml-4">Selected Option: @RoomName</MudText>
+        <MudButton FullWidth="true" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary" OnClick="SendMessage">Send</MudButton>
+    </MudPaper>
 </MudContainer>
 
 
@@ -27,15 +27,28 @@
 
     async Task SendMessage()
     {
+        if (string.IsNullOrWhiteSpace(StickerNumber))
+        {
+            SnackBar.Add("Please set a sticker number/name before sending notification", Severity.Error);
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(RoomName))
         {
             SnackBar.Add("Please select a room before sending notification", Severity.Error);
             return;
         }
-        if (!string.IsNullOrWhiteSpace(StickerNumber) && !string.IsNullOrWhiteSpace(RoomName))
+
+        try
         {
             await Client.TriggerMessageAsync(StickerNumber, RoomName);
-            SnackBar.Add($"Notification Sent: for child \"{StickerNumber}\" in \"{RoomName}\"", Severity.Success);
         }
+        catch (Exception e)
+        {
+            SnackBar.Add("Error Sending Notification.  Alert Your Administrator", Severity.Error);
+            SnackBar.Add(e.Message, Severity.Error);
+            return;
+        }
+        SnackBar.Add($"Notification Sent: for child \"{StickerNumber}\" in \"{RoomName}\"", Severity.Success);
     }
 }
