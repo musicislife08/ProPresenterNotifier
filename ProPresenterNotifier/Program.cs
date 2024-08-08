@@ -15,7 +15,7 @@ builder.Services.AddMudServices();
 builder.Services.AddMudBlazorSnackbar(options =>
 {
     options.PositionClass = Defaults.Classes.Position.BottomCenter;
-    options.SnackbarVariant = Variant.Outlined;
+    options.SnackbarVariant = Variant.Filled;
     options.PreventDuplicates = false;
     options.MaxDisplayedSnackbars = 10;
 });
