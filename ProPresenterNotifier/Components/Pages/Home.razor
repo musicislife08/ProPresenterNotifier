@@ -1,0 +1,41 @@
+﻿@page "/"
+@using ProPresenter.Api
+@inject IProPresenterClient Client
+@inject ISnackbar SnackBar
+
+<PageTitle>Send Message</PageTitle>
+
+<MudContainer>
+            <MudPaper Width="100%" Class="pa-4" Outlined="true">
+                <MudTextField T="string" @bind-Value="StickerNumber" Label="Child Sticker Number" Variant="Variant.Outlined"></MudTextField>
+                <MudRadioGroup T="string" @bind-Value="RoomName">
+                    <MudRadio Value="@("Elementary")">Elementary</MudRadio>
+                    <MudRadio Value="@("PreSchool")">PreSchool</MudRadio>
+                    <MudRadio Value="@("Nursery")">Nursery</MudRadio>
+                    <MudRadio Value="@("PreTeen")">PreTeen</MudRadio>
+                </MudRadioGroup>
+                <MudText Class="ml-4">Selected Option: @RoomName</MudText>
+                <MudButton FullWidth="true" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary" OnClick="SendMessage">Send</MudButton>
+            </MudPaper>
+</MudContainer>
+
+
+@code
+{
+    private string? StickerNumber { get; set; } = string.Empty;
+    private string? RoomName { get; set; }
+
+    async Task SendMessage()
+    {
+        if (string.IsNullOrWhiteSpace(RoomName))
+        {
+            SnackBar.Add("Please select a room before sending notification", Severity.Error);
+            return;
+        }
+        if (!string.IsNullOrWhiteSpace(StickerNumber) && !string.IsNullOrWhiteSpace(RoomName))
+        {
+            await Client.TriggerMessageAsync(StickerNumber, RoomName);
+            SnackBar.Add($"Notification Sent: for child \"{StickerNumber}\" in \"{RoomName}\"", Severity.Success);
+        }
+    }
+}
